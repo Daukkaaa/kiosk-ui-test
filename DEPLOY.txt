@@ -1,0 +1,20 @@
+Kiosk UI static build
+
+This folder is ready to deploy as a static site.
+
+Contents:
+- index.html
+- assets/
+
+Deploy options:
+1. Nginx/Apache: point document root to this folder
+2. Any static hosting: upload the contents of this folder
+3. Node quick test:
+   npx serve .
+
+Notes:
+- This build was created from kiosk-ui-run
+- Demo mode is enabled in the build environment
+- Machine ID was embedded at build time via VITE_MACHINE_ID
+
+If your server serves the app from a subpath instead of '/', Vite base may need adjustment and rebuild.
