@@ -73,9 +73,9 @@ export default function App() {
       setLoading(true);
       let items = [];
       try {
-        items = await getLocalCatalog();
-      } catch {
         items = await getInventory();
+      } catch {
+        items = await getLocalCatalog();
       }
       setInventory(items.filter(i => i.quantity > 0));
     } catch {
