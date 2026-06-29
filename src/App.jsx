@@ -8,7 +8,6 @@ import ErrorScreen from './screens/ErrorScreen';
 import IdleScreen from './screens/IdleScreen';
 import Header from './components/Header';
 import { getInventory } from './api';
-import { getLocalCatalog } from './catalog';
 import { IDLE_TIMEOUT, MACHINE_ID } from './config';
 
 const SCREENS = {
@@ -71,15 +70,10 @@ export default function App() {
     }
     try {
       setLoading(true);
-      let items = [];
-      try {
-        items = await getInventory();
-      } catch {
-        items = await getLocalCatalog();
-      }
+      const items = await getInventory();
       setInventory(items.filter(i => i.quantity > 0));
-    } catch {
-      setError('Не удалось загрузить каталог');
+    } catch (e) {
+      setError(e?.message || 'Не удалось загрузить каталог');
       setScreen(SCREENS.ERROR);
     } finally {
       setLoading(false);
